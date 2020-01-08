@@ -4,13 +4,13 @@
 #
 Name     : perl-Encode-HanExtra
 Version  : 0.23
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/A/AU/AUDREYT/Encode-HanExtra-0.23.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AU/AUDREYT/Encode-HanExtra-0.23.tar.gz
 Summary  : Extra sets of Chinese encodings
 Group    : Development/Tools
 License  : MIT
-Requires: perl-Encode-HanExtra-lib = %{version}-%{release}
+Requires: perl-Encode-HanExtra-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Module::Install)
 
@@ -24,29 +24,31 @@ November 10, 2007.
 %package dev
 Summary: dev components for the perl-Encode-HanExtra package.
 Group: Development
-Requires: perl-Encode-HanExtra-lib = %{version}-%{release}
 Provides: perl-Encode-HanExtra-devel = %{version}-%{release}
+Requires: perl-Encode-HanExtra = %{version}-%{release}
 
 %description dev
 dev components for the perl-Encode-HanExtra package.
 
 
-%package lib
-Summary: lib components for the perl-Encode-HanExtra package.
-Group: Libraries
+%package perl
+Summary: perl components for the perl-Encode-HanExtra package.
+Group: Default
+Requires: perl-Encode-HanExtra = %{version}-%{release}
 
-%description lib
-lib components for the perl-Encode-HanExtra package.
+%description perl
+perl components for the perl-Encode-HanExtra package.
 
 
 %prep
 %setup -q -n Encode-HanExtra-0.23
+cd %{_builddir}/Encode-HanExtra-0.23
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -56,7 +58,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -76,9 +78,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Encode/HanExtra.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Encode/TW/Unisys/SOSI1.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Encode/TW/Unisys/SOSI2.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -86,6 +85,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/share/man/man3/Encode::TW::Unisys::SOSI1.3
 /usr/share/man/man3/Encode::TW::Unisys::SOSI2.3
 
-%files lib
+%files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/Encode/HanExtra/HanExtra.so
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/Encode/HanExtra.pm
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/Encode/TW/Unisys/SOSI1.pm
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/Encode/TW/Unisys/SOSI2.pm
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/auto/Encode/HanExtra/HanExtra.so
