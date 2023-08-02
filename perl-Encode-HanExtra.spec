@@ -4,7 +4,7 @@
 #
 Name     : perl-Encode-HanExtra
 Version  : 0.23
-Release  : 22
+Release  : 23
 URL      : https://cpan.metacpan.org/authors/id/A/AU/AUDREYT/Encode-HanExtra-0.23.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AU/AUDREYT/Encode-HanExtra-0.23.tar.gz
 Summary  : Extra sets of Chinese encodings
